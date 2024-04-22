@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit.prevent="saveMovie">
+        <form id="movieForm" @submit.prevent="saveMovie" action="/api/v1/movies" method="post">
             <div class="form-group mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" name="title" class="form-control"/>
@@ -17,3 +17,17 @@
         </form>
     </div>
 </template>
+
+<script setup>
+const saveMovie = async () => {
+  const form_data = new FormData(document.getElementById('movieForm'));
+  const headers = { 'Accept': 'application/json','Authorization': 'Bearer ' + localStorage.getItem('token') };
+  const response = await fetch('/api/v1/movies', {
+    method: 'POST',
+    headers,
+    body: form_data
+  });
+  const data = await response.json();
+  console.log(data);
+}
+</script>
