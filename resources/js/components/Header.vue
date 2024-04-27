@@ -1,5 +1,17 @@
 <script setup>
-
+import { useRouter } from 'vue-router';
+const router=useRouter();
+const logOut = async () => {
+  const headers = { 'Accept': 'application/json','Authorization': 'Bearer' + localStorage.getItem('token')};
+  const response = await fetch('/api/v1/logout', {
+    method: 'POST',
+    headers,
+  });
+  const data = await response.json();
+  localStorage.removeItem("token");
+  console.log(data);
+  await router.push('/login');
+}
 </script>
 
 <template>
@@ -27,7 +39,7 @@
                         <RouterLink class="nav-link" :class="{ active: $route.path === '/login'}" to="/login">Login</RouterLink>
                     </li>
                     <li class="nav-item">
-                        <RouterLink class="nav-link" :class="{ active: $route.path === '/logout'}" to="/logout">Logout</RouterLink>
+                        <button class="nav-link btn btn-link" @click="logOut">Logout</button>
                     </li>
                 </ul>
             </div>

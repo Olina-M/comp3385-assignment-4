@@ -19,16 +19,20 @@ onMounted(async () => {
 </script>
 
 <template>
-<div class="movie-list">
+<div class="container"></div>
     <h1>Movies</h1>
-    <div class="movie-card" v-for="movie in movies" :key="movie.id">
-    <img :src="'/storage/posters/' + movie.poster" alt="Movie Poster" class="movie-poster" />
-    <div class="movie-info">
-        <h2>{{ movie.title }}</h2>
-        <p>{{ movie.description }}</p>
+    <div class="crow row-cols-1 row-cols-md-3 g-4">
+        <div class="col d-flex" v-for="movie in movies" :key="movie.id">
+            <img :src="'/storage/' + movie.poster" alt="Movie Poster" class="movie-poster" />
+            <div class="movie-card" id="custom-card">
+                <div class="card-body">
+                <h2>{{ movie.title }}</h2>
+                <p>{{ movie.description }}</p>
+            </div>
+            </div>
+        </div>   
     </div>
-    </div>
-</div>
 </template>
+
 
   

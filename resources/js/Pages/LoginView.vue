@@ -1,3 +1,24 @@
+<script setup>
+import { useRouter } from 'vue-router';
+const router=useRouter();
+const authorize = async () => {
+  const form_data = new FormData(document.getElementById('loginForm'));
+  const headers = { 'Accept': 'application/json'};
+  const response = await fetch('/api/v1/login', {
+    method: 'POST',
+    headers,
+    body: form_data
+  });
+  if (!response.ok){
+    console.error("ERROR");
+    return;
+  }
+  const data = await response.json();
+  localStorage.setItem("token",data.token);
+  console.log(data);
+  await router.push('/movies');
+}
+</script>
 <template>
     <div class="container">
         <h2 class="mb-5">Login</h2>
