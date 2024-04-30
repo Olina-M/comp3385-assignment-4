@@ -19,20 +19,53 @@ onMounted(async () => {
 </script>
 
 <template>
-<div class="container"></div>
-    <h1>Movies</h1>
-    <div class="crow row-cols-1 row-cols-md-3 g-4">
-        <div class="col d-flex" v-for="movie in movies" :key="movie.id">
-            <img :src="'/storage/' + movie.poster" alt="Movie Poster" class="movie-poster" />
-            <div class="movie-card" id="custom-card">
-                <div class="card-body">
+    <div class="container">
+      <h1>Movies</h1>
+      <div class="row">
+        <div class="col-md-6" v-for="movie in movies" :key="movie.id">
+          <div class="movie-card" id="custom-card">
+            <div class="d-flex">
+              <img :src="'/storage/' + movie.poster" alt="Movie Poster" class="movie-poster" />
+              <div class="card-body-expanded ms-3">
                 <h2>{{ movie.title }}</h2>
                 <p>{{ movie.description }}</p>
+              </div>
             </div>
-            </div>
-        </div>   
+          </div>
+        </div>
+      </div>
     </div>
-</template>
+  </template>
+  
+  <style scoped>
+  .movie-poster {
+    width: 120px; 
+    height: 180px;
+    object-fit: cover; 
+  }
+  
+  .movie-card {
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    margin-bottom: 20px;
+  }
+  
+  .card-body-expanded {
+    flex-grow: 1;
+    max-width: calc(100% - 140px); 
+  }
+  
+  @media (max-width: 768px) {
+    .movie-poster {
+      width: 100%; 
+      height: auto;
+    }
+  }
+  </style>
+  
+  
+  
+  
 
 
   
